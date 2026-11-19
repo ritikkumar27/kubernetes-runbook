@@ -12,15 +12,17 @@ Every `kubectl` command that appears in the chapter notes, extracted and organis
 
 | Category | File | Commands |
 |----------|------|----------|
-| 01 | [[01 - Cluster and Client Info]] | 1 |
+| 01 | [[01 - Cluster and Client Info]] | 2 |
 | 02 | [[02 - Viewing and Inspecting Resources]] | 5 |
 | 03 | [[03 - Workloads and Deployments]] | 2 |
 | 04 | [[04 - Pods]] | 1 |
 | 05 | [[05 - Scaling]] | 1 |
 | 06 | [[06 - Logs and Debugging]] | 1 |
+| 08 | [[08 - Configuration]] | 3 |
 | 10 | [[10 - Declarative Manifests]] | 1 |
+| 11 | [[11 - Rollouts and Updates]] | 4 |
 
-**Total:** 12 commands · Last scanned: Ch1 Pods (complete)
+**Total:** 20 commands · Last scanned: Ch3 ConfigMaps
 
 ## Master index
 
@@ -38,6 +40,14 @@ Every `kubectl` command that appears in the chapter notes, extracted and organis
 | K8S-010 | `kubectl describe deployment` | Viewing and Inspecting Resources | [[Ch1 Pods - 1]] |
 | K8S-011 | `kubectl get replicasets` | Viewing and Inspecting Resources | [[Ch1 Pods - 1]] |
 | K8S-012 | `kubectl apply -f` | Declarative Manifests | [[Ch1 Pods - 1]] |
+| K8S-013 | `kubectl explain` | Cluster and Client Info | [[Ch2 Pod Management]] |
+| K8S-014 | `kubectl rollout status deployment` | Rollouts and Updates | [[Ch2 Pod Management]] |
+| K8S-015 | `kubectl rollout history deployment` | Rollouts and Updates | [[Ch2 Pod Management]] |
+| K8S-016 | `kubectl rollout restart deployment` | Rollouts and Updates | [[Ch2 Pod Management]] |
+| K8S-017 | `kubectl rollout undo deployment` | Rollouts and Updates | [[Ch2 Pod Management]] |
+| K8S-018 | `kubectl get configmaps` | Configuration | [[Ch3 ConfigMaps]] |
+| K8S-019 | `kubectl create secret generic` | Configuration | [[Ch3 ConfigMaps]] |
+| K8S-020 | `kubectl get secret` | Configuration | [[Ch3 ConfigMaps]] |
 
 ## Reserved categories
 
@@ -46,9 +56,7 @@ Not created yet. A file appears only when a scanned chapter contains a command f
 | # | Scope |
 |---|-------|
 | 07 | Services and Networking |
-| 08 | Configuration (ConfigMaps / Secrets) |
 | 09 | Storage (Volumes / PVCs) |
-| 11 | Rollouts and Updates |
 | 12 | Namespaces and Contexts |
 | 13 | Nodes and Cluster Admin |
 
@@ -58,3 +66,6 @@ Not created yet. A file appears only when a scanned chapter contains a command f
 |---------|---------|--------------|-------|
 | Ch1 Pods | 2026-11-18 | K8S-001 … K8S-008 | Initial build |
 | Ch1 Pods (part 2) | 2026-11-18 | K8S-009 … K8S-012 | Describe, ReplicaSets, YAML config, apply |
+| Ch2 Pod Management | 2026-11-18 | K8S-013 … K8S-017 | Explain, rollout status/history/restart/undo |
+| Ch2 (part 2) | 2026-11-19 | none | API Deployment, Thrashing Pods: reuse only |
+| Ch3 ConfigMaps | 2026-11-19 | K8S-018 … K8S-020 | ConfigMaps, Secrets, decoding values |

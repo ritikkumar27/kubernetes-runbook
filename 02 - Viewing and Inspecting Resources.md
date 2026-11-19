@@ -13,7 +13,7 @@ The commands you type most often. Read-only, safe, and the basis of every debugg
 ## K8S-003 · `kubectl get deployments`
 
 - **First seen:** [[Ch1 Pods - 1]] → Deployments (verifying the create)
-- **Reused:** Ch1 · YAML Config (saving the current configuration with `-o yaml`)
+- **Reused:** Ch1 · YAML Config (saving the current configuration with `-o yaml`) · [[Ch2 Pod Management]] → Dry Run (comparing the noisy live YAML with a clean generated manifest)
 - **Purpose:** List Deployments in the current namespace and see whether they are healthy.
 
 ```sh
@@ -51,7 +51,7 @@ kubectl get deployment synergychat-web -o yaml > my-deployment.yaml
 ## K8S-004 · `kubectl get pods`
 
 - **First seen:** [[Ch1 Pods - 1]] → Pods
-- **Reused:** Ch1 · What Is Kubernetes (after scaling) · Ephemeral · Unique IP Addresses (`-o wide`)
+- **Reused:** Ch1 · What Is Kubernetes (after scaling) · Ephemeral · Unique IP Addresses (`-o wide`) · [[Ch2 Pod Management]] → The Control Plane (`-n kube-system`) · Labels (`-l`, `--show-labels`) · Rollbacks · Thrashing Pods (watching RESTARTS climb) · [[Ch3 ConfigMaps]] → Config Maps · Config Errors
 - **Purpose:** List Pods and their status. The bread-and-butter health check.
 
 ```sh
@@ -68,6 +68,7 @@ Typical columns: `NAME  READY  STATUS  RESTARTS  AGE`.
 | `-A` | All namespaces (essential when you cannot find "missing" pods) |
 | `-w` | Watch pods appear and disappear, great for observing self-healing |
 | `-l app=<name>` | Filter by label |
+| `--show-labels` | Add a LABELS column |
 | `--field-selector status.phase=Running` | Filter by field |
 
 **Unique IPs**
@@ -77,6 +78,17 @@ kubectl get pods -o wide
 ```
 
 Every pod gets its own cluster-internal IP, a different one from the node it runs on. Delete a pod and its replacement gets a fresh address, sometimes the same one recycled. That is exactly why apps should not talk to pod IPs directly, and why Services exist (later chapter).
+
+**Filtering by label**
+
+```sh
+kubectl get pods -l app=synergychat-web
+kubectl get pods --show-labels
+```
+
+`-l` keeps only objects matching the label selector. `--show-labels` adds a LABELS column so you can see `app=synergychat-web` and the `pod-template-hash` the ReplicaSet adds.
+
+Labels, not names, are how ownership works: a Deployment continuously counts pods that match its selector, so a replaced pod with a brand new name is still counted.
 
 **Notes**
 
@@ -88,6 +100,7 @@ Every pod gets its own cluster-internal IP, a different one from the node it run
 ## K8S-009 · `kubectl describe pod`
 
 - **First seen:** [[Ch1 Pods - 1]] → Describe
+- **Reused:** [[Ch2 Pod Management]] → Image Pull Errors (events name the real pull failure) · [[Ch3 ConfigMaps]] → Config Errors (events name the missing key)
 - **Purpose:** Print a long human-readable report about one pod, including the events timeline that `get` never shows.
 
 ```sh
@@ -145,6 +158,7 @@ kubectl describe deployment synergychat-web
 ## K8S-011 · `kubectl get replicasets`
 
 - **First seen:** [[Ch1 Pods - 1]] → Replica Sets
+- **Reused:** [[Ch2 Pod Management]] → Rollouts (new ReplicaSet at 3 pods, old one scaled to 0)
 - **Purpose:** See the ReplicaSets that Deployments created, and which pod-template hash each one runs.
 
 ```sh

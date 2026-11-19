@@ -10,7 +10,7 @@ Create and change the thing that **owns** your pods. Day to day you touch Deploy
 ## K8S-002 · `kubectl create deployment`
 
 - **First seen:** [[Ch1 Pods - 1]] → Deployments
-- **Reused:** Ch1 · Deployment and Pod Review · YAML Config (the "quick and dirty" creation that causes the `last-applied-configuration` warning)
+- **Reused:** Ch1 · Deployment and Pod Review · YAML Config (the "quick and dirty" creation that causes the `last-applied-configuration` warning) · [[Ch2 Pod Management]] → Dry Run (generating a clean manifest)
 - **Purpose:** Imperatively create a Deployment from a container image. Kubernetes then creates the ReplicaSet and Pods for you.
 
 ```sh
@@ -27,6 +27,14 @@ Two inputs are mandatory: the Deployment **name** and the **image ID**.
 | `--replicas=N` | Start with N pods (default 1) |
 | `--port=N` | Declare the container port |
 | `--dry-run=client -o yaml` | Print the manifest instead of creating it |
+
+**Generating a clean manifest**
+
+```sh
+kubectl create deployment synergychat-web --image=bootdotdev/synergychat-web:latest --replicas=3 --dry-run=client -o yaml > web-deployment.yaml
+```
+
+`--dry-run=client` means "build the object, do not send it". Combined with `-o yaml` you get a minimal manifest: no `status`, no `uid`, no `resourceVersion`, no timestamps. This is the right file to commit, unlike a `get -o yaml` dump, which is noisy and can even cause a `Conflict` error if a stale `resourceVersion` is applied.
 
 **Notes**
 
