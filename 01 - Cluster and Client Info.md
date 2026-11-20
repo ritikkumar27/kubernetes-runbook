@@ -9,7 +9,7 @@ Commands that tell you **what you're talking to** and **what it offers**.
 
 ## K8S-001 · `kubectl version`
 
-- **First seen:** [[Ch1 Pods - 1]] → Welcome to "Learn Kubernetes"
+- **First seen:** [[Ch1 Pods]] → Welcome to "Learn Kubernetes"
 - **Reused:** [[Ch2 Pod Management]] → The Control Plane (client vs server are separate programs, often on different machines)
 - **Purpose:** Print the kubectl client version and the cluster's server version. First sanity check on any cluster.
 

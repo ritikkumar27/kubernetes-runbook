@@ -67,6 +67,7 @@ kubectl rollout history deployment synergychat-web
 ## K8S-016 · `kubectl rollout restart deployment`
 
 - **First seen:** [[Ch2 Pod Management]] → Rollouts
+- **Reused:** [[Ch3 ConfigMaps]] → YAML Types (picking up edited config values)
 - **Purpose:** Replace every pod with a fresh one without changing the image or config.
 
 ```sh
@@ -78,6 +79,7 @@ kubectl rollout restart deployment synergychat-web
 - Under the hood it stamps a `kubectl.kubernetes.io/restartedAt` annotation on the pod template, which is a template change, so a new ReplicaSet and a normal rolling update follow.
 - This is the "turn it off and on again" of Kubernetes: use it to pick up a changed ConfigMap/Secret, clear a wedged pod, or force a fresh image pull.
 - Zero downtime, because it obeys the same surge/unavailable rules as any rollout.
+- The ConfigMap case is the common one: env vars are fixed when a container starts, so editing a ConfigMap never reaches running pods by itself.
 - It is a cluster-side change only. Your YAML file is untouched, so it does not show up in Git.
 
 ## K8S-017 · `kubectl rollout undo deployment`

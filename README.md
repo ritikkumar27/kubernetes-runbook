@@ -22,24 +22,24 @@ Every `kubectl` command that appears in the chapter notes, extracted and organis
 | 10 | [[10 - Declarative Manifests]] | 1 |
 | 11 | [[11 - Rollouts and Updates]] | 4 |
 
-**Total:** 20 commands · Last scanned: Ch3 ConfigMaps
+**Total:** 20 commands · Last scanned: Ch3 ConfigMaps (complete)
 
 ## Master index
 
 | Serial | Command | Category | First seen |
 |--------|---------|----------|------------|
-| K8S-001 | `kubectl version` | Cluster and Client Info | [[Ch1 Pods - 1]] |
-| K8S-002 | `kubectl create deployment` | Workloads and Deployments | [[Ch1 Pods - 1]] |
-| K8S-003 | `kubectl get deployments` | Viewing and Inspecting Resources | [[Ch1 Pods - 1]] |
-| K8S-004 | `kubectl get pods` | Viewing and Inspecting Resources | [[Ch1 Pods - 1]] |
-| K8S-005 | `kubectl scale deployment` | Scaling | [[Ch1 Pods - 1]] |
-| K8S-006 | `kubectl logs` | Logs and Debugging | [[Ch1 Pods - 1]] |
-| K8S-007 | `kubectl delete pod` | Pods | [[Ch1 Pods - 1]] |
-| K8S-008 | `kubectl edit deployment` | Workloads and Deployments | [[Ch1 Pods - 1]] |
-| K8S-009 | `kubectl describe pod` | Viewing and Inspecting Resources | [[Ch1 Pods - 1]] |
-| K8S-010 | `kubectl describe deployment` | Viewing and Inspecting Resources | [[Ch1 Pods - 1]] |
-| K8S-011 | `kubectl get replicasets` | Viewing and Inspecting Resources | [[Ch1 Pods - 1]] |
-| K8S-012 | `kubectl apply -f` | Declarative Manifests | [[Ch1 Pods - 1]] |
+| K8S-001 | `kubectl version` | Cluster and Client Info | [[Ch1 Pods]] |
+| K8S-002 | `kubectl create deployment` | Workloads and Deployments | [[Ch1 Pods]] |
+| K8S-003 | `kubectl get deployments` | Viewing and Inspecting Resources | [[Ch1 Pods]] |
+| K8S-004 | `kubectl get pods` | Viewing and Inspecting Resources | [[Ch1 Pods]] |
+| K8S-005 | `kubectl scale deployment` | Scaling | [[Ch1 Pods]] |
+| K8S-006 | `kubectl logs` | Logs and Debugging | [[Ch1 Pods]] |
+| K8S-007 | `kubectl delete pod` | Pods | [[Ch1 Pods]] |
+| K8S-008 | `kubectl edit deployment` | Workloads and Deployments | [[Ch1 Pods]] |
+| K8S-009 | `kubectl describe pod` | Viewing and Inspecting Resources | [[Ch1 Pods]] |
+| K8S-010 | `kubectl describe deployment` | Viewing and Inspecting Resources | [[Ch1 Pods]] |
+| K8S-011 | `kubectl get replicasets` | Viewing and Inspecting Resources | [[Ch1 Pods]] |
+| K8S-012 | `kubectl apply -f` | Declarative Manifests | [[Ch1 Pods]] |
 | K8S-013 | `kubectl explain` | Cluster and Client Info | [[Ch2 Pod Management]] |
 | K8S-014 | `kubectl rollout status deployment` | Rollouts and Updates | [[Ch2 Pod Management]] |
 | K8S-015 | `kubectl rollout history deployment` | Rollouts and Updates | [[Ch2 Pod Management]] |
@@ -69,3 +69,4 @@ Not created yet. A file appears only when a scanned chapter contains a command f
 | Ch2 Pod Management | 2026-11-18 | K8S-013 … K8S-017 | Explain, rollout status/history/restart/undo |
 | Ch2 (part 2) | 2026-11-19 | none | API Deployment, Thrashing Pods: reuse only |
 | Ch3 ConfigMaps | 2026-11-19 | K8S-018 … K8S-020 | ConfigMaps, Secrets, decoding values |
+| Ch3 (part 2) | 2026-11-20 | none | Crawler, YAML types: reuse only. Ch1 note renamed to `Ch1 Pods.md`, links updated |

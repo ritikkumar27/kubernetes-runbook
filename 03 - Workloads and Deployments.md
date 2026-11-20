@@ -9,7 +9,7 @@ Create and change the thing that **owns** your pods. Day to day you touch Deploy
 
 ## K8S-002 · `kubectl create deployment`
 
-- **First seen:** [[Ch1 Pods - 1]] → Deployments
+- **First seen:** [[Ch1 Pods]] → Deployments
 - **Reused:** Ch1 · Deployment and Pod Review · YAML Config (the "quick and dirty" creation that causes the `last-applied-configuration` warning) · [[Ch2 Pod Management]] → Dry Run (generating a clean manifest)
 - **Purpose:** Imperatively create a Deployment from a container image. Kubernetes then creates the ReplicaSet and Pods for you.
 
@@ -45,7 +45,7 @@ kubectl create deployment synergychat-web --image=bootdotdev/synergychat-web:lat
 
 ## K8S-008 · `kubectl edit deployment`
 
-- **First seen:** [[Ch1 Pods - 1]] → Desired State
+- **First seen:** [[Ch1 Pods]] → Desired State
 - **Reused:** Ch1 · YAML Config (contrasted with the declarative `apply -f` workflow)
 - **Purpose:** Open the live object as YAML in your editor and apply the change on save. Handy for a quick fix in a lab.
 

@@ -54,7 +54,19 @@ env:
         key: API_PORT
 ```
 
-One key at a time with `configMapKeyRef`, or every key at once with `envFrom: - configMapRef: {name: ...}`. A missing map or key stops the pod before it starts (`CreateContainerConfigError`).
+One key at a time with `configMapKeyRef`. For a whole map, use `envFrom` instead:
+
+```yaml
+envFrom:
+  - configMapRef:
+      name: synergychat-crawler-configmap
+```
+
+That injects **every key** in the map as an environment variable, which beats repeating the verbose block per variable.
+
+**Edits do not reach running pods.** Environment variables are set when a container starts. `apply`ing a changed ConfigMap changes nothing inside a running pod, and does not trigger a rollout. Run `kubectl rollout restart deployment <name>` to replace the pods and pick up the new values.
+
+A missing map or key stops the pod before it starts (`CreateContainerConfigError`).
 
 ## K8S-019 · `kubectl create secret generic`
 
@@ -138,3 +150,26 @@ kubectl get secret synergychat-api-secret -o jsonpath='{.data.AI_API_KEY}' | bas
 | `describe pod` events say `couldn't find key X in ConfigMap ...` | That is the exact missing key |
 
 Fix by pointing the container at an existing key, or by adding the key to the ConfigMap. Unlike a crash, there is no app output to read, so events are the only evidence.
+
+## YAML types
+
+YAML infers a type for every value, and Kubernetes is strict about it.
+
+| Written | Parsed as | Valid in `data` / env `value`? |
+|---------|-----------|-------------------------------|
+| `"8080"` | string | yes |
+| `8080` | number | no |
+| `"true"` / `"yes"` | string | yes |
+| `true` / `yes` | boolean | no |
+| `"1.10"` | string | yes |
+| `1.10` | float | no |
+
+Every ConfigMap `data` value must be a string, and so must an env var's `value`. Get it wrong and the whole file is rejected:
+
+```text
+json: cannot unmarshal number into Go struct field ConfigMap.data of type string
+```
+
+Fields like `spec.replicas` expect a real number, so leave those unquoted.
+
+**Rule:** if a value looks like a number or boolean but must be a string, quote it. That includes `"8080"`, `"true"`, `"1.10"`, `"yes"`, and the keywords string `"love,hate,joy"`. The parser also treats `yes`, `no`, `on` and `off` as booleans, which is a well-known source of confusion.

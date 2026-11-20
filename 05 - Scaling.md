@@ -8,7 +8,7 @@ Changing the number of running copies. Cheap to do, easy to forget to undo.
 
 ## K8S-005 · `kubectl scale deployment`
 
-- **First seen:** [[Ch1 Pods - 1]] → What Is Kubernetes
+- **First seen:** [[Ch1 Pods]] → What Is Kubernetes
 - **Reused:** [[Ch2 Pod Management]] → Scaling (the walkthrough of what the cluster does after `scale`)
 - **Purpose:** Change a Deployment's replica count in one shot, without an editor.
 

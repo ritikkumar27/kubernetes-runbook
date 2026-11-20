@@ -12,7 +12,7 @@ The commands you type most often. Read-only, safe, and the basis of every debugg
 
 ## K8S-003 · `kubectl get deployments`
 
-- **First seen:** [[Ch1 Pods - 1]] → Deployments (verifying the create)
+- **First seen:** [[Ch1 Pods]] → Deployments (verifying the create)
 - **Reused:** Ch1 · YAML Config (saving the current configuration with `-o yaml`) · [[Ch2 Pod Management]] → Dry Run (comparing the noisy live YAML with a clean generated manifest)
 - **Purpose:** List Deployments in the current namespace and see whether they are healthy.
 
@@ -50,8 +50,8 @@ kubectl get deployment synergychat-web -o yaml > my-deployment.yaml
 
 ## K8S-004 · `kubectl get pods`
 
-- **First seen:** [[Ch1 Pods - 1]] → Pods
-- **Reused:** Ch1 · What Is Kubernetes (after scaling) · Ephemeral · Unique IP Addresses (`-o wide`) · [[Ch2 Pod Management]] → The Control Plane (`-n kube-system`) · Labels (`-l`, `--show-labels`) · Rollbacks · Thrashing Pods (watching RESTARTS climb) · [[Ch3 ConfigMaps]] → Config Maps · Config Errors
+- **First seen:** [[Ch1 Pods]] → Pods
+- **Reused:** Ch1 · What Is Kubernetes (after scaling) · Ephemeral · Unique IP Addresses (`-o wide`) · [[Ch2 Pod Management]] → The Control Plane (`-n kube-system`) · Labels (`-l`, `--show-labels`) · Rollbacks · Thrashing Pods (watching RESTARTS climb) · [[Ch3 ConfigMaps]] → Config Maps · Config Errors · Crawler
 - **Purpose:** List Pods and their status. The bread-and-butter health check.
 
 ```sh
@@ -99,7 +99,7 @@ Labels, not names, are how ownership works: a Deployment continuously counts pod
 
 ## K8S-009 · `kubectl describe pod`
 
-- **First seen:** [[Ch1 Pods - 1]] → Describe
+- **First seen:** [[Ch1 Pods]] → Describe
 - **Reused:** [[Ch2 Pod Management]] → Image Pull Errors (events name the real pull failure) · [[Ch3 ConfigMaps]] → Config Errors (events name the missing key)
 - **Purpose:** Print a long human-readable report about one pod, including the events timeline that `get` never shows.
 
@@ -134,7 +134,7 @@ kubectl describe pod POD_NAME
 
 ## K8S-010 · `kubectl describe deployment`
 
-- **First seen:** [[Ch1 Pods - 1]] → Describe (assignment)
+- **First seen:** [[Ch1 Pods]] → Describe (assignment)
 - **Purpose:** See the deployment's replicas, strategy, selector, pod template and rollout events in one page.
 
 ```sh
@@ -157,7 +157,7 @@ kubectl describe deployment synergychat-web
 
 ## K8S-011 · `kubectl get replicasets`
 
-- **First seen:** [[Ch1 Pods - 1]] → Replica Sets
+- **First seen:** [[Ch1 Pods]] → Replica Sets
 - **Reused:** [[Ch2 Pod Management]] → Rollouts (new ReplicaSet at 3 pods, old one scaled to 0)
 - **Purpose:** See the ReplicaSets that Deployments created, and which pod-template hash each one runs.
 
