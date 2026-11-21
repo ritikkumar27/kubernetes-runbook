@@ -13,7 +13,7 @@ Every `kubectl` command that appears in the chapter notes, extracted and organis
 | Category | File | Commands |
 |----------|------|----------|
 | 01 | [[01 - Cluster and Client Info]] | 2 |
-| 02 | [[02 - Viewing and Inspecting Resources]] | 5 |
+| 02 | [[02 - Viewing and Inspecting Resources]] | 6 |
 | 03 | [[03 - Workloads and Deployments]] | 3 |
 | 04 | [[04 - Pods]] | 1 |
 | 05 | [[05 - Scaling]] | 1 |
@@ -24,7 +24,7 @@ Every `kubectl` command that appears in the chapter notes, extracted and organis
 | 11 | [[11 - Rollouts and Updates]] | 4 |
 | 12 | [[12 - Namespaces and Contexts]] | 4 |
 
-**Total:** 29 commands · Last scanned: Ch5 Namespaces
+**Total:** 30 commands · Last scanned: Ch6 Resources
 
 ## Master index
 
@@ -59,6 +59,7 @@ Every `kubectl` command that appears in the chapter notes, extracted and organis
 | K8S-027 | `kubectl delete configmap` | Configuration | [[Ch5 Namespaces]] |
 | K8S-028 | `kubectl config get-contexts` | Namespaces and Contexts | [[Ch5 Namespaces]] |
 | K8S-029 | `kubectl config set-context --current` | Namespaces and Contexts | [[Ch5 Namespaces]] |
+| K8S-030 | `kubectl top pod` | Viewing and Inspecting Resources | [[Ch6 Resources]] |
 
 ## Reserved categories
 
@@ -81,3 +82,4 @@ Not created yet. A file appears only when a scanned chapter contains a command f
 | Ch3 (part 2) | 2026-11-20 | none | Crawler, YAML types: reuse only. Ch1 note renamed to `Ch1 Pods.md`, links updated |
 | Ch4 Services | 2026-11-21 | K8S-021 … K8S-022 | Endpoints, service types, NodePort |
 | Ch5 Namespaces | 2026-11-21 | K8S-023 … K8S-029 | Namespaces, deletes, contexts |
+| Ch6 Resources | 2026-11-21 | K8S-030 | `top`, limits vs requests, OOMKilled vs Pending |
