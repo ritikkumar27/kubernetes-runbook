@@ -16,15 +16,16 @@ Every `kubectl` command that appears in the chapter notes, extracted and organis
 | 02 | [[02 - Viewing and Inspecting Resources]] | 6 |
 | 03 | [[03 - Workloads and Deployments]] | 3 |
 | 04 | [[04 - Pods]] | 1 |
-| 05 | [[05 - Scaling]] | 1 |
+| 05 | [[05 - Scaling]] | 3 |
 | 06 | [[06 - Logs and Debugging]] | 1 |
 | 07 | [[07 - Services and Networking]] | 3 |
 | 08 | [[08 - Configuration]] | 4 |
 | 10 | [[10 - Declarative Manifests]] | 1 |
 | 11 | [[11 - Rollouts and Updates]] | 4 |
 | 12 | [[12 - Namespaces and Contexts]] | 4 |
+| 13 | [[13 - Nodes and Cluster Admin]] | 1 |
 
-**Total:** 30 commands · Last scanned: Ch6 Resources
+**Total:** 33 commands · Last scanned: Ch7 Scaling
 
 ## Master index
 
@@ -60,6 +61,9 @@ Every `kubectl` command that appears in the chapter notes, extracted and organis
 | K8S-028 | `kubectl config get-contexts` | Namespaces and Contexts | [[Ch5 Namespaces]] |
 | K8S-029 | `kubectl config set-context --current` | Namespaces and Contexts | [[Ch5 Namespaces]] |
 | K8S-030 | `kubectl top pod` | Viewing and Inspecting Resources | [[Ch6 Resources]] |
+| K8S-031 | `kubectl get hpa` | Scaling | [[Ch7 Scaling]] |
+| K8S-032 | `kubectl describe hpa` | Scaling | [[Ch7 Scaling]] |
+| K8S-033 | `kubectl get nodes` | Nodes and Cluster Admin | [[Ch7 Scaling]] |
 
 ## Reserved categories
 
@@ -68,7 +72,6 @@ Not created yet. A file appears only when a scanned chapter contains a command f
 | # | Scope |
 |---|-------|
 | 09 | Storage (Volumes / PVCs) |
-| 13 | Nodes and Cluster Admin |
 
 ## Scan log
 
@@ -83,3 +86,4 @@ Not created yet. A file appears only when a scanned chapter contains a command f
 | Ch4 Services | 2026-11-21 | K8S-021 … K8S-022 | Endpoints, service types, NodePort |
 | Ch5 Namespaces | 2026-11-21 | K8S-023 … K8S-029 | Namespaces, deletes, contexts |
 | Ch6 Resources | 2026-11-21 | K8S-030 | `top`, limits vs requests, OOMKilled vs Pending |
+| Ch7 Scaling | 2026-11-21 | K8S-031 … K8S-033 | HPA get/describe, nodes |

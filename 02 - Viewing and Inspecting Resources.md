@@ -52,7 +52,7 @@ kubectl get deployment synergychat-web -o yaml > my-deployment.yaml
 ## K8S-004 · `kubectl get pods`
 
 - **First seen:** [[Ch1 Pods]] → Pods
-- **Reused:** Ch1 · What Is Kubernetes (after scaling) · Ephemeral · Unique IP Addresses (`-o wide`) · [[Ch2 Pod Management]] → The Control Plane (`-n kube-system`) · Labels (`-l`, `--show-labels`) · Rollbacks · Thrashing Pods (watching RESTARTS climb) · [[Ch3 ConfigMaps]] → Config Maps · Config Errors · Crawler · [[Ch5 Namespaces]] → Moving Namespaces (`-n crawler`) · Contexts · [[Ch6 Resources]] → Limits - RAM · Breaking the Limits · Requests
+- **Reused:** Ch1 · What Is Kubernetes (after scaling) · Ephemeral · Unique IP Addresses (`-o wide`) · [[Ch2 Pod Management]] → The Control Plane (`-n kube-system`) · Labels (`-l`, `--show-labels`) · Rollbacks · Thrashing Pods (watching RESTARTS climb) · [[Ch3 ConfigMaps]] → Config Maps · Config Errors · Crawler · [[Ch5 Namespaces]] → Moving Namespaces (`-n crawler`) · Contexts · [[Ch6 Resources]] → Limits - RAM · Breaking the Limits · Requests · [[Ch7 Scaling]] → Horizontal Pod Autoscaling · Scaling Down
 - **Purpose:** List Pods and their status. The bread-and-butter health check.
 
 ```sh
@@ -188,7 +188,7 @@ Typical columns: `NAME  DESIRED  CURRENT  READY  AGE`.
 ## K8S-030 · `kubectl top pod`
 
 - **First seen:** [[Ch6 Resources]] → Top (assignment)
-- **Reused:** Ch6 · Resource Limits (`-n crawler`) · Limits - RAM · Breaking the Limits
+- **Reused:** Ch6 · Resource Limits (`-n crawler`) · Limits - RAM · Breaking the Limits · [[Ch7 Scaling]] → Horizontal Pod Autoscaling (`top pods -n crawler`)
 - **Purpose:** Show live CPU and memory usage per pod, like `top` for a cluster. Pairs with `describe` when something is being throttled or killed.
 
 ```sh
