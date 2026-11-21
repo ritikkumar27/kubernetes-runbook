@@ -18,11 +18,12 @@ Every `kubectl` command that appears in the chapter notes, extracted and organis
 | 04 | [[04 - Pods]] | 1 |
 | 05 | [[05 - Scaling]] | 1 |
 | 06 | [[06 - Logs and Debugging]] | 1 |
+| 07 | [[07 - Services and Networking]] | 2 |
 | 08 | [[08 - Configuration]] | 3 |
 | 10 | [[10 - Declarative Manifests]] | 1 |
 | 11 | [[11 - Rollouts and Updates]] | 4 |
 
-**Total:** 20 commands · Last scanned: Ch3 ConfigMaps (complete)
+**Total:** 22 commands · Last scanned: Ch4 Services
 
 ## Master index
 
@@ -48,6 +49,8 @@ Every `kubectl` command that appears in the chapter notes, extracted and organis
 | K8S-018 | `kubectl get configmaps` | Configuration | [[Ch3 ConfigMaps]] |
 | K8S-019 | `kubectl create secret generic` | Configuration | [[Ch3 ConfigMaps]] |
 | K8S-020 | `kubectl get secret` | Configuration | [[Ch3 ConfigMaps]] |
+| K8S-021 | `kubectl get endpoints` | Services and Networking | [[Ch4 Services]] |
+| K8S-022 | `kubectl get services` | Services and Networking | [[Ch4 Services]] |
 
 ## Reserved categories
 
@@ -55,7 +58,6 @@ Not created yet. A file appears only when a scanned chapter contains a command f
 
 | # | Scope |
 |---|-------|
-| 07 | Services and Networking |
 | 09 | Storage (Volumes / PVCs) |
 | 12 | Namespaces and Contexts |
 | 13 | Nodes and Cluster Admin |
@@ -70,3 +72,4 @@ Not created yet. A file appears only when a scanned chapter contains a command f
 | Ch2 (part 2) | 2026-11-19 | none | API Deployment, Thrashing Pods: reuse only |
 | Ch3 ConfigMaps | 2026-11-19 | K8S-018 … K8S-020 | ConfigMaps, Secrets, decoding values |
 | Ch3 (part 2) | 2026-11-20 | none | Crawler, YAML types: reuse only. Ch1 note renamed to `Ch1 Pods.md`, links updated |
+| Ch4 Services | 2026-11-21 | K8S-021 … K8S-022 | Endpoints, service types, NodePort |
