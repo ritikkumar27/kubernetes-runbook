@@ -14,16 +14,17 @@ Every `kubectl` command that appears in the chapter notes, extracted and organis
 |----------|------|----------|
 | 01 | [[01 - Cluster and Client Info]] | 2 |
 | 02 | [[02 - Viewing and Inspecting Resources]] | 5 |
-| 03 | [[03 - Workloads and Deployments]] | 2 |
+| 03 | [[03 - Workloads and Deployments]] | 3 |
 | 04 | [[04 - Pods]] | 1 |
 | 05 | [[05 - Scaling]] | 1 |
 | 06 | [[06 - Logs and Debugging]] | 1 |
-| 07 | [[07 - Services and Networking]] | 2 |
-| 08 | [[08 - Configuration]] | 3 |
+| 07 | [[07 - Services and Networking]] | 3 |
+| 08 | [[08 - Configuration]] | 4 |
 | 10 | [[10 - Declarative Manifests]] | 1 |
 | 11 | [[11 - Rollouts and Updates]] | 4 |
+| 12 | [[12 - Namespaces and Contexts]] | 4 |
 
-**Total:** 22 commands · Last scanned: Ch4 Services
+**Total:** 29 commands · Last scanned: Ch5 Namespaces
 
 ## Master index
 
@@ -51,6 +52,13 @@ Every `kubectl` command that appears in the chapter notes, extracted and organis
 | K8S-020 | `kubectl get secret` | Configuration | [[Ch3 ConfigMaps]] |
 | K8S-021 | `kubectl get endpoints` | Services and Networking | [[Ch4 Services]] |
 | K8S-022 | `kubectl get services` | Services and Networking | [[Ch4 Services]] |
+| K8S-023 | `kubectl create namespace` | Namespaces and Contexts | [[Ch5 Namespaces]] |
+| K8S-024 | `kubectl get namespaces` | Namespaces and Contexts | [[Ch5 Namespaces]] |
+| K8S-025 | `kubectl delete deployment` | Workloads and Deployments | [[Ch5 Namespaces]] |
+| K8S-026 | `kubectl delete service` | Services and Networking | [[Ch5 Namespaces]] |
+| K8S-027 | `kubectl delete configmap` | Configuration | [[Ch5 Namespaces]] |
+| K8S-028 | `kubectl config get-contexts` | Namespaces and Contexts | [[Ch5 Namespaces]] |
+| K8S-029 | `kubectl config set-context --current` | Namespaces and Contexts | [[Ch5 Namespaces]] |
 
 ## Reserved categories
 
@@ -59,7 +67,6 @@ Not created yet. A file appears only when a scanned chapter contains a command f
 | # | Scope |
 |---|-------|
 | 09 | Storage (Volumes / PVCs) |
-| 12 | Namespaces and Contexts |
 | 13 | Nodes and Cluster Admin |
 
 ## Scan log
@@ -73,3 +80,4 @@ Not created yet. A file appears only when a scanned chapter contains a command f
 | Ch3 ConfigMaps | 2026-11-19 | K8S-018 … K8S-020 | ConfigMaps, Secrets, decoding values |
 | Ch3 (part 2) | 2026-11-20 | none | Crawler, YAML types: reuse only. Ch1 note renamed to `Ch1 Pods.md`, links updated |
 | Ch4 Services | 2026-11-21 | K8S-021 … K8S-022 | Endpoints, service types, NodePort |
+| Ch5 Namespaces | 2026-11-21 | K8S-023 … K8S-029 | Namespaces, deletes, contexts |

@@ -7,6 +7,7 @@ Config that lives outside the container image: ConfigMaps for innocent values, S
 | K8S-018 | `kubectl get configmaps` |
 | K8S-019 | `kubectl create secret generic` |
 | K8S-020 | `kubectl get secret` |
+| K8S-027 | `kubectl delete configmap` |
 
 ## Why ConfigMaps exist
 
@@ -17,6 +18,7 @@ Values must be **strings**, so quote numbers: `API_PORT: "8080"`.
 ## K8S-018 · `kubectl get configmaps`
 
 - **First seen:** [[Ch3 ConfigMaps]] → Config Maps (assignment)
+- **Reused:** [[Ch5 Namespaces]] → Creating a Namespace (`-n crawler get configmaps`)
 - **Purpose:** List ConfigMaps in the namespace and confirm yours was created.
 
 ```sh
@@ -173,3 +175,19 @@ json: cannot unmarshal number into Go struct field ConfigMap.data of type string
 Fields like `spec.replicas` expect a real number, so leave those unquoted.
 
 **Rule:** if a value looks like a number or boolean but must be a string, quote it. That includes `"8080"`, `"true"`, `"1.10"`, `"yes"`, and the keywords string `"love,hate,joy"`. The parser also treats `yes`, `no`, `on` and `off` as booleans, which is a well-known source of confusion.
+
+## K8S-027 · `kubectl delete configmap`
+
+- **First seen:** [[Ch5 Namespaces]] → Creating a Namespace (cleaning up the old `default` namespace copy)
+- **Purpose:** Remove a ConfigMap.
+
+```sh
+kubectl delete configmap synergychat-crawler-configmap
+```
+
+**Notes**
+
+- Pods already running keep their environment variables. The values were copied in at container start, so nothing breaks immediately.
+- The damage shows up on the **next** restart: the pod cannot build its environment and lands in `CreateContainerConfigError`. Since a Deployment replaces pods on any rollout, that failure is often one `apply` away.
+- `cm` is the short form. `delete secret` behaves the same way.
+- If the ConfigMap is mounted as a volume instead of env vars, files can vanish from the running pod, which is a different and nastier failure mode.

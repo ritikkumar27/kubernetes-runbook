@@ -51,7 +51,7 @@ kubectl get deployment synergychat-web -o yaml > my-deployment.yaml
 ## K8S-004 · `kubectl get pods`
 
 - **First seen:** [[Ch1 Pods]] → Pods
-- **Reused:** Ch1 · What Is Kubernetes (after scaling) · Ephemeral · Unique IP Addresses (`-o wide`) · [[Ch2 Pod Management]] → The Control Plane (`-n kube-system`) · Labels (`-l`, `--show-labels`) · Rollbacks · Thrashing Pods (watching RESTARTS climb) · [[Ch3 ConfigMaps]] → Config Maps · Config Errors · Crawler
+- **Reused:** Ch1 · What Is Kubernetes (after scaling) · Ephemeral · Unique IP Addresses (`-o wide`) · [[Ch2 Pod Management]] → The Control Plane (`-n kube-system`) · Labels (`-l`, `--show-labels`) · Rollbacks · Thrashing Pods (watching RESTARTS climb) · [[Ch3 ConfigMaps]] → Config Maps · Config Errors · Crawler · [[Ch5 Namespaces]] → Moving Namespaces (`-n crawler`) · Contexts
 - **Purpose:** List Pods and their status. The bread-and-butter health check.
 
 ```sh
@@ -89,6 +89,8 @@ kubectl get pods --show-labels
 `-l` keeps only objects matching the label selector. `--show-labels` adds a LABELS column so you can see `app=synergychat-web` and the `pod-template-hash` the ReplicaSet adds.
 
 Labels, not names, are how ownership works: a Deployment continuously counts pods that match its selector, so a replaced pod with a brand new name is still counted.
+
+Counts pods in one namespace only. `kubectl -n crawler get pods` and `kubectl get pods -n crawler` are equivalent; the flag can go before or after the verb.
 
 **Notes**
 

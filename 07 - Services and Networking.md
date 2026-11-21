@@ -6,6 +6,7 @@ Pods come and go with new IPs. A Service is the stable address in front of them.
 |--------|---------|
 | K8S-021 | `kubectl get endpoints` |
 | K8S-022 | `kubectl get services` |
+| K8S-026 | `kubectl delete service` |
 
 ## How a Service works
 
@@ -72,7 +73,7 @@ Output is one line: `NAME  ENDPOINTS  AGE`, where ENDPOINTS lists `10.1.2.3:8080
 ## K8S-022 · `kubectl get services`
 
 - **First seen:** [[Ch4 Services]] → Service Types (reading `clusterIP` and `type`)
-- **Reused:** Ch4 · API Service (verifying `80:30080/TCP`)
+- **Reused:** Ch4 · API Service (verifying `80:30080/TCP`) · [[Ch5 Namespaces]] → Creating a Namespace (`-n crawler get svc`)
 - **Purpose:** List Services, their type, ClusterIP and exposed ports.
 
 ```sh
@@ -107,3 +108,19 @@ Typical columns: `NAME  TYPE  CLUSTER-IP  EXTERNAL-IP  PORT(S)  AGE`.
 - `EXTERNAL-IP  <pending>` on a LoadBalancer usually means the cloud controller has no LB implementation, common on local clusters.
 - `kubectl get svc <name> -o yaml` is how you inspect the generated DNS-relevant details, including `spec.clusterIP` and `spec.ports[].nodePort`.
 - From inside the cluster, `http://web-service` works in the same namespace, `web-service.default` across namespaces, and the full `<svc>.<ns>.svc.cluster.local` always works.
+
+## K8S-026 · `kubectl delete service`
+
+- **First seen:** [[Ch5 Namespaces]] → Creating a Namespace (cleaning up the old `default` namespace copy)
+- **Purpose:** Remove a Service, which stops routing traffic to its pods without touching the pods themselves.
+
+```sh
+kubectl delete service web-service
+```
+
+**Notes**
+
+- The pods keep running. Only the stable address and its endpoints disappear, so anything calling the Service now fails to connect.
+- `svc` works here too: `kubectl delete svc web-service`.
+- Deleting and recreating a ClusterIP Service usually yields a **new ClusterIP**, so anything using the IP rather than the DNS name breaks. Prefer the name.
+- In a move between namespaces, both copies can exist at once, which is why you delete the old one explicitly.

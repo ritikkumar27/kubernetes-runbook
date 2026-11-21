@@ -6,6 +6,7 @@ Create and change the thing that **owns** your pods. Day to day you touch Deploy
 |--------|---------|
 | K8S-002 | `kubectl create deployment` |
 | K8S-008 | `kubectl edit deployment` |
+| K8S-025 | `kubectl delete deployment` |
 
 ## K8S-002 · `kubectl create deployment`
 
@@ -67,3 +68,28 @@ spec:
 - Closing the editor without saving changes nothing.
 - It is a live, imperative edit and nothing records it in Git. A later `apply` of the old manifest will revert you. For real work, edit the YAML file under version control and `kubectl apply` it.
 - To skip the editor entirely, use `kubectl patch deployment <name> -p '{"spec":{"replicas":2}}'`.
+
+## K8S-025 · `kubectl delete deployment`
+
+- **First seen:** [[Ch5 Namespaces]] → Creating a Namespace (cleaning up the old `default` namespace copies)
+- **Purpose:** Remove a Deployment and, by default, everything it owns.
+
+```sh
+kubectl delete deployment synergychat-crawler
+```
+
+**Flags**
+
+| Flag | Effect |
+|------|--------|
+| `--cascade=background` | Default: delete the Deployment, its ReplicaSet and its Pods |
+| `--cascade=orphan` | Delete only the Deployment, leave the Pods running |
+| `--wait=false` | Do not block until the objects are gone |
+| `-n <namespace>` | Target namespace |
+
+**Notes**
+
+- The cascade is the point: deleting a Deployment is the real "stop this app", unlike deleting a Pod, which gets replaced.
+- Like `delete pod`, this is a cluster action. The manifest in Git is untouched, so a later `apply -f` brings it right back.
+- Deleting the whole namespace does the same thing to every object inside it, all at once.
+- Double-check the active context first if you switched namespaces with `config set-context`.
