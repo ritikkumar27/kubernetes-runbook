@@ -9,7 +9,7 @@ The real way Kubernetes is used: write YAML, keep it in Git, `apply` it. Imperat
 ## K8S-012 · `kubectl apply -f`
 
 - **First seen:** [[Ch1 Pods]] → YAML Config (assignment)
-- **Reused:** [[Ch2 Pod Management]] → Dry Run (dry-running an apply before doing it for real) · API Deployment (first deployment written from scratch) · [[Ch3 ConfigMaps]] → Config Maps · Applying the Config Map · Crawler · YAML Types · [[Ch4 Services]] → all three service manifests · [[Ch5 Namespaces]] → Creating a Namespace (re-applying with `metadata.namespace`) · [[Ch6 Resources]] → every limits/requests change · [[Ch7 Scaling]] → HPA manifests
+- **Reused:** [[Ch2 Pod Management]] → Dry Run (dry-running an apply before doing it for real) · API Deployment (first deployment written from scratch) · [[Ch3 ConfigMaps]] → Config Maps · Applying the Config Map · Crawler · YAML Types · [[Ch4 Services]] → all three service manifests · [[Ch5 Namespaces]] → Creating a Namespace (re-applying with `metadata.namespace`) · [[Ch6 Resources]] → every limits/requests change · [[Ch7 Scaling]] → HPA manifests · [[Ch8 Health Checks]] → every probe change
 - **Purpose:** Send a YAML file to the API server and let Kubernetes create or update the object to match it.
 
 ```sh

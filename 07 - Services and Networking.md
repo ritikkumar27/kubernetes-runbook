@@ -73,7 +73,7 @@ Output is one line: `NAME  ENDPOINTS  AGE`, where ENDPOINTS lists `10.1.2.3:8080
 ## K8S-022 · `kubectl get services`
 
 - **First seen:** [[Ch4 Services]] → Service Types (reading `clusterIP` and `type`)
-- **Reused:** Ch4 · API Service (verifying `80:30080/TCP`) · [[Ch5 Namespaces]] → Creating a Namespace (`-n crawler get svc`)
+- **Reused:** Ch4 · API Service (verifying `80:30080/TCP`) · [[Ch5 Namespaces]] → Creating a Namespace (`-n crawler get svc`) · [[Ch8 Health Checks]] → Readiness Probes · Broken Cluster
 - **Purpose:** List Services, their type, ClusterIP and exposed ports.
 
 ```sh

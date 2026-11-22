@@ -8,6 +8,22 @@ Every `kubectl` command that appears in the chapter notes, extracted and organis
 - **Categories follow real kubectl usage** (inspect → change → debug → scale), not the docs sidebar. Each category is its own numbered file.
 - **One entry per command**, not per invocation. Repeats across chapters are added to the entry's **Reused** line.
 
+## Debugging ladder
+
+Work from a high-level symptom down to the root cause. This order is fast because each step narrows the next one.
+
+| Step | Command | What it tells you | Go here when |
+|------|---------|-------------------|--------------|
+| 1 | `kubectl get pods` | Which pods are not `Running` and `1/1` | Always start here |
+| 2 | `kubectl describe pod` | Events, last state, probe config | A specific pod is unhealthy |
+| 3 | `kubectl logs` | Why the app died | `RESTARTS` is climbing |
+| 4 | `kubectl get endpoints` | Which pods actually receive traffic | Pods look fine but traffic fails |
+
+Two traps this ladder catches:
+
+- A pod `Running` but `0/1` with `RESTARTS 0` is a **readiness** problem, not a crash. Do not read logs; read the probe config.
+- A Service whose selector matches nothing is perfectly valid, so Kubernetes never warns you. `endpoints` showing `<none>` is the only signal.
+
 ## At a glance
 
 | Category | File | Commands |
@@ -25,7 +41,7 @@ Every `kubectl` command that appears in the chapter notes, extracted and organis
 | 12 | [[12 - Namespaces and Contexts]] | 4 |
 | 13 | [[13 - Nodes and Cluster Admin]] | 1 |
 
-**Total:** 33 commands · Last scanned: Ch7 Scaling
+**Total:** 33 commands · Last scanned: Ch8 Health Checks
 
 ## Master index
 
@@ -87,3 +103,4 @@ Not created yet. A file appears only when a scanned chapter contains a command f
 | Ch5 Namespaces | 2026-11-21 | K8S-023 … K8S-029 | Namespaces, deletes, contexts |
 | Ch6 Resources | 2026-11-21 | K8S-030 | `top`, limits vs requests, OOMKilled vs Pending |
 | Ch7 Scaling | 2026-11-21 | K8S-031 … K8S-033 | HPA get/describe, nodes |
+| Ch8 Health Checks | 2026-11-22 | none | Probes documented under 04 Pods; debugging ladder added to README |

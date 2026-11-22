@@ -9,7 +9,7 @@ First stop when a pod is unhealthy. Everything here is read-only and safe to run
 ## K8S-006 · `kubectl logs`
 
 - **First seen:** [[Ch1 Pods]] → Ephemeral
-- **Reused:** [[Ch2 Pod Management]] → Thrashing Pods (reading the missing-env-var crash) · [[Ch3 ConfigMaps]] → Crawler (confirming the crawler fetches books)
+- **Reused:** [[Ch2 Pod Management]] → Thrashing Pods (reading the missing-env-var crash) · [[Ch3 ConfigMaps]] → Crawler (confirming the crawler fetches books) · [[Ch8 Health Checks]] → Broken Cluster (crash-looping API)
 - **Purpose:** Print what the container writes to stdout/stderr, the app's own view of what is happening.
 
 ```sh
