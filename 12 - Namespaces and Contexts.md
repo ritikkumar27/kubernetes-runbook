@@ -20,6 +20,7 @@ Grouping resources, and not typing `-n` on every command.
 ## K8S-023 · `kubectl create namespace`
 
 - **First seen:** [[Ch5 Namespaces]] → Creating a Namespace (assignment)
+- **Reused:** [[Ch9 Local Cluster]] → Apply Everything (recreating `crawler` on a fresh context)
 - **Purpose:** Create a namespace.
 
 ```sh

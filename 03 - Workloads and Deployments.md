@@ -64,6 +64,7 @@ spec:
 **Notes**
 
 - Editor order: `$KUBE_EDITOR`, then `$EDITOR`, then `vi`.
+- For VS Code or Zed set `export EDITOR="code -w"` / `export EDITOR="zed -w"`. The `-w` flag makes the editor block until you close it; without it `edit` continues with an unchanged buffer.
 - Saving sends a patch to the API server. The controller reconciles immediately, so pods appear or disappear right away.
 - Closing the editor without saving changes nothing.
 - It is a live, imperative edit and nothing records it in Git. A later `apply` of the old manifest will revert you. For real work, edit the YAML file under version control and `kubectl apply` it.

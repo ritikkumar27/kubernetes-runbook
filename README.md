@@ -28,7 +28,7 @@ Two traps this ladder catches:
 
 | Category | File | Commands |
 |----------|------|----------|
-| 01 | [[01 - Cluster and Client Info]] | 2 |
+| 01 | [[01 - Cluster and Client Info]] | 3 |
 | 02 | [[02 - Viewing and Inspecting Resources]] | 6 |
 | 03 | [[03 - Workloads and Deployments]] | 3 |
 | 04 | [[04 - Pods]] | 1 |
@@ -39,9 +39,10 @@ Two traps this ladder catches:
 | 10 | [[10 - Declarative Manifests]] | 1 |
 | 11 | [[11 - Rollouts and Updates]] | 4 |
 | 12 | [[12 - Namespaces and Contexts]] | 4 |
-| 13 | [[13 - Nodes and Cluster Admin]] | 1 |
+| 13 | [[13 - Nodes and Cluster Admin]] | 2 |
+| 14 | [[14 - Local Cluster and Tooling]] | 1 |
 
-**Total:** 33 commands · Last scanned: Ch8 Health Checks
+**Total:** 36 commands · Last scanned: Ch9 Local Cluster
 
 ## Master index
 
@@ -80,6 +81,9 @@ Two traps this ladder catches:
 | K8S-031 | `kubectl get hpa` | Scaling | [[Ch7 Scaling]] |
 | K8S-032 | `kubectl describe hpa` | Scaling | [[Ch7 Scaling]] |
 | K8S-033 | `kubectl get nodes` | Nodes and Cluster Admin | [[Ch7 Scaling]] |
+| K8S-034 | `minikube addons enable` | Local Cluster and Tooling | [[Ch9 Local Cluster]] |
+| K8S-035 | `kubectl top node` | Nodes and Cluster Admin | [[Ch9 Local Cluster]] |
+| K8S-036 | `kubectl proxy` | Cluster and Client Info | [[Ch9 Local Cluster]] |
 
 ## Reserved categories
 
@@ -104,3 +108,4 @@ Not created yet. A file appears only when a scanned chapter contains a command f
 | Ch6 Resources | 2026-11-21 | K8S-030 | `top`, limits vs requests, OOMKilled vs Pending |
 | Ch7 Scaling | 2026-11-21 | K8S-031 … K8S-033 | HPA get/describe, nodes |
 | Ch8 Health Checks | 2026-11-22 | none | Probes documented under 04 Pods; debugging ladder added to README |
+| Ch9 Local Cluster | 2026-11-23 | K8S-034 … K8S-036 | minikube addons, `top node`, `proxy`, install notes |

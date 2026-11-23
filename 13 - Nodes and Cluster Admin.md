@@ -5,6 +5,7 @@ The machines themselves. Pod-level autoscaling adds pods; node-level autoscaling
 | Serial | Command |
 |--------|---------|
 | K8S-033 | `kubectl get nodes` |
+| K8S-035 | `kubectl top node` |
 
 ## Node types
 
@@ -43,3 +44,29 @@ Typical columns: `NAME  STATUS  ROLES  AGE  VERSION`. `STATUS Ready` means the n
 - To see why a pod does not fit, `kubectl describe node <name>` shows the sum of pod requests against allocatable, plus `Allocated resources` in percentages.
 - Draining and cordoning (`kubectl drain`, `kubectl cordon`) are the maintenance commands you will need later. Not covered in the notes yet.
 - `kubectl get nodes -o wide` plus `kubectl top node` is the usual pair for "is the cluster full, or is one node sick".
+
+## K8S-035 · `kubectl top node`
+
+- **First seen:** [[Ch9 Local Cluster]] → Metrics
+- **Purpose:** Show CPU and memory usage per node, the machine-level counterpart to `kubectl top pod`.
+
+```sh
+kubectl top node
+```
+
+Typical columns: `NAME  CPU(cores)  CPU%  MEMORY(bytes)  MEMORY%`.
+
+**Flags**
+
+| Flag | Effect |
+|------|--------|
+| `--sort-by=cpu` / `--sort-by=memory` | Rank nodes by load |
+| `--show-capacity` | Show allocatable capacity next to usage |
+| `-l <selector>` | Limit to matching nodes |
+
+**Notes**
+
+- Requires metrics-server. On Minikube enable it with `minikube addons enable metrics-server`, then wait for that pod to become ready.
+- `CPU%` and `MEMORY%` are measured against **allocatable**, not total capacity.
+- Usage is not the same as scheduling headroom. A node at 10% usage can still refuse a pod because *requests* are what the scheduler counts. Use `kubectl describe node` for allocated requests.
+- On a single-node Minikube cluster this command has one row, which makes it a quick way to confirm metrics are working at all.
