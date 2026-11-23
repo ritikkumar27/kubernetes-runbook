@@ -97,6 +97,7 @@ Counts pods in one namespace only. `kubectl -n crawler get pods` and `kubectl ge
 
 - Pod names look like `synergychat-web-xxxxyyyzzz-xxyyz`: `<deployment>-<replicaset-hash>-<random>`. The hash names the ReplicaSet that owns it.
 - STATUS values you should read as a story: `ContainerCreating`, `Running`, `Completed`, `CrashLoopBackOff`, `ImagePullBackOff`, `Pending`, `Terminating`.
+- `Completed` is **success**, not a fault. It is the normal end state for pods owned by a Job.
 - RESTARTS climbing means the container keeps crashing. Jump to `kubectl logs` or `describe` next.
 - A Pod deleted by hand under a Deployment is replaced automatically. The desired state always wins.
 

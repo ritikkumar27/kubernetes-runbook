@@ -41,8 +41,9 @@ Two traps this ladder catches:
 | 12 | [[12 - Namespaces and Contexts]] | 4 |
 | 13 | [[13 - Nodes and Cluster Admin]] | 2 |
 | 14 | [[14 - Local Cluster and Tooling]] | 2 |
+| 15 | [[15 - Jobs and CronJobs]] | 1 |
 
-**Total:** 39 commands · Last scanned: Ch10 Gateway
+**Total:** 40 commands · Last scanned: Ch11 Jobs
 
 ## Master index
 
@@ -87,6 +88,7 @@ Two traps this ladder catches:
 | K8S-037 | `minikube tunnel` | Local Cluster and Tooling | [[Ch10 Gateway]] |
 | K8S-038 | `kubectl get gateway` | Services and Networking | [[Ch10 Gateway]] |
 | K8S-039 | `kubectl describe httproute` | Services and Networking | [[Ch10 Gateway]] |
+| K8S-040 | `kubectl get jobs` | Jobs and CronJobs | [[Ch11 Jobs]] |
 
 ## Reserved categories
 
@@ -113,3 +115,4 @@ Not created yet. A file appears only when a scanned chapter contains a command f
 | Ch8 Health Checks | 2026-11-22 | none | Probes documented under 04 Pods; debugging ladder added to README |
 | Ch9 Local Cluster | 2026-11-23 | K8S-034 … K8S-036 | minikube addons, `top node`, `proxy`, install notes |
 | Ch10 Gateway | 2026-11-23 | K8S-037 … K8S-039 | Gateway API, HTTPRoute conditions, tunnel |
+| Ch11 Jobs | 2026-11-23 | K8S-040 | Jobs, CronJobs, cron syntax |
