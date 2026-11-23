@@ -52,7 +52,7 @@ kubectl get deployment synergychat-web -o yaml > my-deployment.yaml
 ## K8S-004 · `kubectl get pods`
 
 - **First seen:** [[Ch1 Pods]] → Pods
-- **Reused:** Ch1 · What Is Kubernetes (after scaling) · Ephemeral · Unique IP Addresses (`-o wide`) · [[Ch2 Pod Management]] → The Control Plane (`-n kube-system`) · Labels (`-l`, `--show-labels`) · Rollbacks · Thrashing Pods (watching RESTARTS climb) · [[Ch3 ConfigMaps]] → Config Maps · Config Errors · Crawler · [[Ch5 Namespaces]] → Moving Namespaces (`-n crawler`) · Contexts · [[Ch6 Resources]] → Limits - RAM · Breaking the Limits · Requests · [[Ch7 Scaling]] → Horizontal Pod Autoscaling · Scaling Down · [[Ch8 Health Checks]] → Readiness Probes · Broken Cluster · [[Ch9 Local Cluster]] → Apply Everything
+- **Reused:** Ch1 · What Is Kubernetes (after scaling) · Ephemeral · Unique IP Addresses (`-o wide`) · [[Ch2 Pod Management]] → The Control Plane (`-n kube-system`) · Labels (`-l`, `--show-labels`) · Rollbacks · Thrashing Pods (watching RESTARTS climb) · [[Ch3 ConfigMaps]] → Config Maps · Config Errors · Crawler · [[Ch5 Namespaces]] → Moving Namespaces (`-n crawler`) · Contexts · [[Ch6 Resources]] → Limits - RAM · Breaking the Limits · Requests · [[Ch7 Scaling]] → Horizontal Pod Autoscaling · Scaling Down · [[Ch8 Health Checks]] → Readiness Probes · Broken Cluster · [[Ch9 Local Cluster]] → Apply Everything · [[Ch12 Storage]] → Containers in Pods (`READY 3/3`), Attach Persistence
 - **Purpose:** List Pods and their status. The bread-and-butter health check.
 
 ```sh
@@ -104,7 +104,7 @@ Counts pods in one namespace only. `kubectl -n crawler get pods` and `kubectl ge
 ## K8S-009 · `kubectl describe pod`
 
 - **First seen:** [[Ch1 Pods]] → Describe
-- **Reused:** [[Ch2 Pod Management]] → Image Pull Errors (events name the real pull failure) · [[Ch3 ConfigMaps]] → Config Errors (events name the missing key) · [[Ch6 Resources]] → Breaking the Limits (`Last State` reason) · Resource Requests (`FailedScheduling` events) · [[Ch8 Health Checks]] → Startup Probes (`Startup:` / `Liveness:` blocks) · Broken Cluster
+- **Reused:** [[Ch2 Pod Management]] → Image Pull Errors (events name the real pull failure) · [[Ch3 ConfigMaps]] → Config Errors (events name the missing key) · [[Ch6 Resources]] → Breaking the Limits (`Last State` reason) · Resource Requests (`FailedScheduling` events) · [[Ch8 Health Checks]] → Startup Probes (`Startup:` / `Liveness:` blocks) · Broken Cluster · [[Ch12 Storage]] → Ephemeral Volumes (`describe pod` on the half-ready crawler pod)
 - **Purpose:** Print a long human-readable report about one pod, including the events timeline that `get` never shows.
 
 ```sh

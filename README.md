@@ -36,14 +36,17 @@ Two traps this ladder catches:
 | 06 | [[06 - Logs and Debugging]] | 1 |
 | 07 | [[07 - Services and Networking]] | 5 |
 | 08 | [[08 - Configuration]] | 4 |
+| 09 | [[09 - Storage]] | 0 |
 | 10 | [[10 - Declarative Manifests]] | 1 |
 | 11 | [[11 - Rollouts and Updates]] | 4 |
 | 12 | [[12 - Namespaces and Contexts]] | 4 |
 | 13 | [[13 - Nodes and Cluster Admin]] | 2 |
-| 14 | [[14 - Local Cluster and Tooling]] | 2 |
+| 14 | [[14 - Local Cluster and Tooling]] | 4 |
 | 15 | [[15 - Jobs and CronJobs]] | 1 |
 
-**Total:** 40 commands · Last scanned: Ch11 Jobs
+**Total:** 42 commands · Last scanned: Ch12 Storage
+
+09 Storage holds a concept reference (volumes, PV/PVC) but no commands yet: Chapter 12 changes storage entirely through YAML, and every command it uses is already indexed elsewhere.
 
 ## Master index
 
@@ -89,14 +92,12 @@ Two traps this ladder catches:
 | K8S-038 | `kubectl get gateway` | Services and Networking | [[Ch10 Gateway]] |
 | K8S-039 | `kubectl describe httproute` | Services and Networking | [[Ch10 Gateway]] |
 | K8S-040 | `kubectl get jobs` | Jobs and CronJobs | [[Ch11 Jobs]] |
+| K8S-041 | `minikube stop` | Local Cluster and Tooling | [[Ch12 Storage]] |
+| K8S-042 | `minikube delete` | Local Cluster and Tooling | [[Ch12 Storage]] |
 
-## Reserved categories
+## Concept-only files
 
-Not created yet. A file appears only when a scanned chapter contains a command for it.
-
-| # | Scope |
-|---|-------|
-| 09 | Storage (Volumes / PVCs) |
+`09 - Storage` exists because Chapter 12 explains volumes, PVs and PVCs without introducing a single new `kubectl` resource command. If a later chapter adds one, it becomes a normal entry there.
 
 ## Scan log
 
@@ -116,3 +117,4 @@ Not created yet. A file appears only when a scanned chapter contains a command f
 | Ch9 Local Cluster | 2026-11-23 | K8S-034 … K8S-036 | minikube addons, `top node`, `proxy`, install notes |
 | Ch10 Gateway | 2026-11-23 | K8S-037 … K8S-039 | Gateway API, HTTPRoute conditions, tunnel |
 | Ch11 Jobs | 2026-11-23 | K8S-040 | Jobs, CronJobs, cron syntax |
+| Ch12 Storage | 2026-11-23 | K8S-041 … K8S-042 | Volumes, PV/PVC concepts in 09; `minikube stop` / `delete` |

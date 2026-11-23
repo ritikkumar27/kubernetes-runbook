@@ -75,7 +75,7 @@ Output is one line: `NAME  ENDPOINTS  AGE`, where ENDPOINTS lists `10.1.2.3:8080
 ## K8S-022 · `kubectl get services`
 
 - **First seen:** [[Ch4 Services]] → Service Types (reading `clusterIP` and `type`)
-- **Reused:** Ch4 · API Service (verifying `80:30080/TCP`) · [[Ch5 Namespaces]] → Creating a Namespace (`-n crawler get svc`) · [[Ch8 Health Checks]] → Readiness Probes · Broken Cluster · [[Ch10 Gateway]] → Tips (last hop in the routing ladder)
+- **Reused:** Ch4 · API Service (verifying `80:30080/TCP`) · [[Ch5 Namespaces]] → Creating a Namespace (`-n crawler get svc`) · [[Ch8 Health Checks]] → Readiness Probes · Broken Cluster · [[Ch10 Gateway]] → Tips (last hop in the routing ladder) · [[Ch12 Storage]] → Containers in Pods (only 8080 exposed)
 - **Purpose:** List Services, their type, ClusterIP and exposed ports.
 
 ```sh
@@ -191,7 +191,7 @@ Internal traffic is faster, needs no public DNS, and stays off the public intern
 ## K8S-038 · `kubectl get gateway`
 
 - **First seen:** [[Ch10 Gateway]] → Tunnel (reading the load balancer IP)
-- **Reused:** Ch10 · DNS · Tips
+- **Reused:** Ch10 · DNS · Tips · [[Ch12 Storage]] → Storage in Kubernetes (tunnel still needed to test the app)
 - **Purpose:** Show Gateway objects and, critically, the address the load balancer handed to them.
 
 ```sh

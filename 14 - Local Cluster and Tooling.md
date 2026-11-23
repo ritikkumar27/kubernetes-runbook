@@ -6,6 +6,8 @@ Setting up a cluster on your own machine, and the non-`kubectl` commands that co
 |--------|---------|
 | K8S-034 | `minikube addons enable` |
 | K8S-037 | `minikube tunnel` |
+| K8S-041 | `minikube stop` |
+| K8S-042 | `minikube delete` |
 
 ## Installing kubectl
 
@@ -91,3 +93,48 @@ minikube tunnel -c
 - The IP it hands out can change. After a reboot, run `minikube start` and reopen the tunnel, then re-check the address and `/etc/hosts`.
 - If `-c` exits immediately instead of staying open, run plain `minikube tunnel`; `--cleanup` is a teardown flag in current minikube.
 - This is a local-development trick. In production a cloud load balancer or your own edge router provides that address, not a tunnel on your laptop.
+
+## K8S-041 · `minikube stop`
+
+- **First seen:** [[Ch12 Storage]] → Cleaning Up
+- **Purpose:** Shut the local cluster down while keeping its disk state.
+
+```sh
+minikube stop
+```
+
+**Notes**
+
+- Everything comes back with `minikube start`: same pods, same volumes, same images.
+- Saves CPU and memory between sessions, which matters on a laptop.
+- The tunnel and `kubectl proxy` must be restarted afterwards, and the tunnel IP may change.
+- `kubectl` commands will fail with a connection error while the cluster is stopped, which is expected, not a config problem.
+
+## K8S-042 · `minikube delete`
+
+- **First seen:** [[Ch12 Storage]] → Cleaning Up
+- **Purpose:** Destroy the local cluster and everything in it.
+
+```sh
+minikube delete
+```
+
+**What is lost**
+
+| Lost | Survives |
+|------|----------|
+| All pods, services, volumes | Your YAML files in Git |
+| `/etc/hosts` entries stop working | The manifests themselves |
+| The cluster's images and state | Your kubeconfig contexts pointing elsewhere |
+
+**Rebuild from scratch**
+
+```sh
+minikube start
+minikube addons enable metrics-server
+kubectl create namespace crawler
+kubectl apply --server-side -f https://github.com/envoyproxy/gateway/releases/download/v1.5.1/install.yaml
+kubectl apply -f .        # from the k8s manifest directory
+```
+
+That list is the practical argument for infrastructure-as-code: the cluster is disposable, the configuration is not.
