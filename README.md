@@ -34,15 +34,15 @@ Two traps this ladder catches:
 | 04 | [[04 - Pods]] | 1 |
 | 05 | [[05 - Scaling]] | 3 |
 | 06 | [[06 - Logs and Debugging]] | 1 |
-| 07 | [[07 - Services and Networking]] | 3 |
+| 07 | [[07 - Services and Networking]] | 5 |
 | 08 | [[08 - Configuration]] | 4 |
 | 10 | [[10 - Declarative Manifests]] | 1 |
 | 11 | [[11 - Rollouts and Updates]] | 4 |
 | 12 | [[12 - Namespaces and Contexts]] | 4 |
 | 13 | [[13 - Nodes and Cluster Admin]] | 2 |
-| 14 | [[14 - Local Cluster and Tooling]] | 1 |
+| 14 | [[14 - Local Cluster and Tooling]] | 2 |
 
-**Total:** 36 commands · Last scanned: Ch9 Local Cluster
+**Total:** 39 commands · Last scanned: Ch10 Gateway
 
 ## Master index
 
@@ -84,6 +84,9 @@ Two traps this ladder catches:
 | K8S-034 | `minikube addons enable` | Local Cluster and Tooling | [[Ch9 Local Cluster]] |
 | K8S-035 | `kubectl top node` | Nodes and Cluster Admin | [[Ch9 Local Cluster]] |
 | K8S-036 | `kubectl proxy` | Cluster and Client Info | [[Ch9 Local Cluster]] |
+| K8S-037 | `minikube tunnel` | Local Cluster and Tooling | [[Ch10 Gateway]] |
+| K8S-038 | `kubectl get gateway` | Services and Networking | [[Ch10 Gateway]] |
+| K8S-039 | `kubectl describe httproute` | Services and Networking | [[Ch10 Gateway]] |
 
 ## Reserved categories
 
@@ -109,3 +112,4 @@ Not created yet. A file appears only when a scanned chapter contains a command f
 | Ch7 Scaling | 2026-11-21 | K8S-031 … K8S-033 | HPA get/describe, nodes |
 | Ch8 Health Checks | 2026-11-22 | none | Probes documented under 04 Pods; debugging ladder added to README |
 | Ch9 Local Cluster | 2026-11-23 | K8S-034 … K8S-036 | minikube addons, `top node`, `proxy`, install notes |
+| Ch10 Gateway | 2026-11-23 | K8S-037 … K8S-039 | Gateway API, HTTPRoute conditions, tunnel |

@@ -9,7 +9,7 @@ Pod-level lifecycle actions. You rarely create bare Pods in real work, but you d
 ## K8S-007 · `kubectl delete pod`
 
 - **First seen:** [[Ch1 Pods]] → Ephemeral
-- **Reused:** Ch1 · Unique IP Addresses (deleting a pod to watch its IP change)
+- **Reused:** Ch1 · Unique IP Addresses (deleting a pod to watch its IP change) · [[Ch10 Gateway]] → Chat (deleting the api pod to prove in-memory state is lost)
 - **Purpose:** Terminate a Pod. Demonstrates that Pods are disposable and that a Deployment replaces them.
 
 ```sh

@@ -5,6 +5,7 @@ Setting up a cluster on your own machine, and the non-`kubectl` commands that co
 | Serial | Command |
 |--------|---------|
 | K8S-034 | `minikube addons enable` |
+| K8S-037 | `minikube tunnel` |
 
 ## Installing kubectl
 
@@ -66,3 +67,27 @@ minikube addons enable metrics-server
 | Purpose | Learning, local testing | Serving users |
 
 A single node means one resource ceiling. Once the machine is full, extra pods stay `Pending` with `Insufficient cpu` or `Insufficient memory` — there is no second node for the scheduler to try. That is the practical difference you feel while learning.
+
+## K8S-037 · `minikube tunnel`
+
+- **First seen:** [[Ch10 Gateway]] → Tunnel
+- **Purpose:** Give LoadBalancer-type Services and Gateways a real, reachable IP on your machine. Without it they sit with no address.
+
+```sh
+minikube tunnel -c
+```
+
+**Flags**
+
+| Flag | Effect |
+|------|--------|
+| `-c` / `--cleanup` | Clear stale tunnel routes before starting |
+| `--bind-address` | Address to bind the tunnel to |
+
+**Notes**
+
+- It **blocks**, so keep it in its own terminal for the rest of the course. `Ctrl+C` closes it.
+- It asks for your password, because it adds local routes and a loopback address.
+- The IP it hands out can change. After a reboot, run `minikube start` and reopen the tunnel, then re-check the address and `/etc/hosts`.
+- If `-c` exits immediately instead of staying open, run plain `minikube tunnel`; `--cleanup` is a teardown flag in current minikube.
+- This is a local-development trick. In production a cloud load balancer or your own edge router provides that address, not a tunnel on your laptop.

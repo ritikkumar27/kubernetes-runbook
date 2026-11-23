@@ -7,6 +7,8 @@ Pods come and go with new IPs. A Service is the stable address in front of them.
 | K8S-021 | `kubectl get endpoints` |
 | K8S-022 | `kubectl get services` |
 | K8S-026 | `kubectl delete service` |
+| K8S-038 | `kubectl get gateway` |
+| K8S-039 | `kubectl describe httproute` |
 
 ## How a Service works
 
@@ -73,7 +75,7 @@ Output is one line: `NAME  ENDPOINTS  AGE`, where ENDPOINTS lists `10.1.2.3:8080
 ## K8S-022 · `kubectl get services`
 
 - **First seen:** [[Ch4 Services]] → Service Types (reading `clusterIP` and `type`)
-- **Reused:** Ch4 · API Service (verifying `80:30080/TCP`) · [[Ch5 Namespaces]] → Creating a Namespace (`-n crawler get svc`) · [[Ch8 Health Checks]] → Readiness Probes · Broken Cluster
+- **Reused:** Ch4 · API Service (verifying `80:30080/TCP`) · [[Ch5 Namespaces]] → Creating a Namespace (`-n crawler get svc`) · [[Ch8 Health Checks]] → Readiness Probes · Broken Cluster · [[Ch10 Gateway]] → Tips (last hop in the routing ladder)
 - **Purpose:** List Services, their type, ClusterIP and exposed ports.
 
 ```sh
@@ -124,3 +126,143 @@ kubectl delete service web-service
 - `svc` works here too: `kubectl delete svc web-service`.
 - Deleting and recreating a ClusterIP Service usually yields a **new ClusterIP**, so anything using the IP rather than the DNS name breaks. Prefer the name.
 - In a move between namespaces, both copies can exist at once, which is why you delete the old one explicitly.
+
+## Gateway API
+
+The modern way to expose services. Four objects, each owned by a different team in practice:
+
+| Object | Owner | Job |
+|--------|-------|-----|
+| `GatewayClass` | Infra | Names which controller (e.g. Envoy Gateway) implements gateways |
+| `Gateway` | Infra | Declares the listener: protocol, port, entry point |
+| `HTTPRoute` | App team | Hostnames and paths → backend Services |
+| `Service` | App team | Stable address in front of pods |
+
+Traffic path: client → Gateway-managed load balancer → Gateway → HTTPRoute rules → Service → Pod.
+
+```yaml
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata: { name: app-gateway }
+spec:
+  gatewayClassName: app-gatewayclass
+  listeners:
+    - { name: http, protocol: HTTP, port: 80 }
+```
+
+```yaml
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata: { name: web-httproute }
+spec:
+  parentRefs: [{ name: app-gateway }]
+  hostnames: ["synchat.internal"]
+  rules:
+    - matches: [{ path: { type: PathPrefix, value: / } }]
+      backendRefs: [{ name: web-service, port: 80 }]
+```
+
+`apiVersion: gateway.networking.k8s.io/v1` is not core Kubernetes. The Envoy Gateway install adds those CRDs, which is why `kubectl apply` must run before any Gateway manifest works.
+
+**Ingress vs Gateway**
+
+| | Ingress | Gateway API |
+|---|---|---|
+| Shape | One object for entry point + routes | GatewayClass + Gateway + HTTPRoutes |
+| Extra behaviour | Controller-specific annotations | Standard fields |
+| Status | Frozen | Actively developed |
+
+Use Gateway for new work. You will still meet Ingress in existing systems.
+
+## Intra-cluster DNS
+
+Every Service gets a DNS name:
+
+```text
+<service-name>.<namespace>.svc.cluster.local
+```
+
+- Same namespace: `http://web-service`
+- Cross namespace: `http://crawler.crawler` or the full `http://crawler.crawler.svc.cluster.local`
+- `.svc.cluster.local` is usually optional; the short forms resolve first
+
+Internal traffic is faster, needs no public DNS, and stays off the public internet, so keep it internal unless something outside the cluster must reach it.
+
+## K8S-038 · `kubectl get gateway`
+
+- **First seen:** [[Ch10 Gateway]] → Tunnel (reading the load balancer IP)
+- **Reused:** Ch10 · DNS · Tips
+- **Purpose:** Show Gateway objects and, critically, the address the load balancer handed to them.
+
+```sh
+kubectl get gateway app-gateway
+```
+
+Typical columns: `NAME  CLASS  ADDRESS  PROGRAMMED  AGE`.
+
+**Pulling just the IP**
+
+```sh
+kubectl get gateway app-gateway -o custom-columns="IP:.status.addresses[0].value" --no-headers
+```
+
+`-o custom-columns` takes `Header:json.path` pairs; `--no-headers` drops the header so it can be used in a script or `/etc/hosts` edit.
+
+**Flags**
+
+| Flag | Effect |
+|------|--------|
+| `-o yaml` | Full status, including listeners and conditions |
+| `-o custom-columns=...` | Pick specific fields |
+| `-A` | All namespaces |
+| `-n <namespace>` | Target namespace |
+
+**Notes**
+
+- An empty `ADDRESS` usually means the load balancer is not ready yet. On Minikube that means `minikube tunnel` is not running.
+- `ADDRESS <none>` right after starting the tunnel is normal for a few seconds.
+- The tunnel IP can change after a reboot, so re-check it before touching `/etc/hosts`.
+- `kubectl get gateways` lists them; `get gatewayclass` shows the controller wiring.
+
+## K8S-039 · `kubectl describe httproute`
+
+- **First seen:** [[Ch10 Gateway]] → Tips (checking the route was `Accepted`)
+- **Purpose:** See whether a route is actually attached to its Gateway and resolving its backends.
+
+```sh
+kubectl describe httproute web-httproute
+```
+
+**What to read**
+
+| Section | Meaning |
+|---------|---------|
+| `Parents` | The Gateway this route attached to, with `Accepted` / `ResolvedRefs` conditions |
+| `Rules` | Hostnames, matches, backend Services |
+| `Events` | Controller messages, including rejection reasons |
+
+**Notes**
+
+- `Accepted: False` means the route is not bound to the Gateway. Check `parentRefs.name` and that both live in the same namespace.
+- `ResolvedRefs: False` means a backend Service name or port is wrong.
+- `get httproute` gives a one-line summary; `describe` is where the conditions live.
+- A correct route with a wrong Service still fails at the next hop, so follow up with `kubectl get endpoints <service>`.
+
+## Testing a route from your machine
+
+With `minikube tunnel` open, the Gateway has a routable IP. Because routing is by `Host` header, `curl` must send one:
+
+```sh
+curl -H "Host: synchat.internal" http://<gateway-ip>
+curl -H "Host: synchatapi.internal" http://<gateway-ip>/healthz
+```
+
+`ping <hostname>` only proves `/etc/hosts` resolves; it says nothing about routing. If ICMP is blocked, `curl` is the better test.
+
+**Ladder when the site does not load** (chapter order, each step narrows the next):
+
+1. `ping synchat.internal` resolves to the Gateway IP → else fix `/etc/hosts`
+2. `kubectl get gateway app-gateway` has an address and the tunnel is running
+3. `kubectl describe httproute web-httproute` shows `Accepted`
+4. `kubectl get endpoints web-service` lists pod IPs
+5. `kubectl logs` on the app pods shows requests arriving
