@@ -95,10 +95,6 @@ Two traps this ladder catches:
 | K8S-041 | `minikube stop` | Local Cluster and Tooling | [[Ch12 Storage]] |
 | K8S-042 | `minikube delete` | Local Cluster and Tooling | [[Ch12 Storage]] |
 
-## Concept-only files
-
-`09 - Storage` exists because Chapter 12 explains volumes, PVs and PVCs without introducing a single new `kubectl` resource command. If a later chapter adds one, it becomes a normal entry there.
-
 ## Scan log
 
 | Chapter | Scanned | New commands | Notes |
